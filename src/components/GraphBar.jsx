@@ -2,6 +2,7 @@ import { useState } from 'react';
 import investmentsData from '../database/investments-2022-11-btc.json';
 import {
   BarChart,
+  LabelList,
   Bar,
   XAxis,
   YAxis,
@@ -11,6 +12,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import StatusBar from '../components/StatusBar';
+import { resumeByMonth } from '../helpers/helpers';
 
 export default function GraphBar() {
   const [selectedFundId, setSelectedFundId] = useState(
@@ -32,15 +34,26 @@ export default function GraphBar() {
     setSelectedFundName(fundId[0].description);
   };
 
+  const Result = Filter[11].value - Filter[0].value;
+
+  const monthReturn = [];
+
+  for (let i = 0; i < investNames.length; i++) {
+    const mReturn = Filter[i + 1].value / Filter[i].value - 1;
+    monthReturn.push(mReturn.toFixed(2));
+  }
+
+  const ResultFullByMonth = resumeByMonth(Filter);
+
   return (
     <>
-      <StatusBar fund={selectedFundName} />
+      <StatusBar fund={selectedFundName} Result={Result} />
       <div>
         <ResponsiveContainer width='100%' aspect={3}>
           <BarChart
             width={500}
             height={300}
-            data={Filter}
+            data={ResultFullByMonth}
             margin={{
               top: 5,
               right: 30,
@@ -49,23 +62,24 @@ export default function GraphBar() {
             }}
           >
             <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='month' name='Month' />
-            <YAxis />
+            <XAxis dataKey='Month' name='Month' />
+            <YAxis type='number' domain={[0, 3000]} />
             <Tooltip />
             <Legend />
-            <Bar
-              dataKey='value'
-              type='number'
-              fill='#8884d8'
-              tickFormatter={(value) => value.toFixed('2')}
-            />
+            <Bar dataKey='Value' fill='#fe4a49'>
+              <LabelList
+                dataKey='Value'
+                position='insideStart'
+                style={{ fill: 'white' }}
+              />
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
         <div className='grid grid-cols-7 text-sm'>
           {investNames.map((ele) => (
             <button
               key={ele}
-              className='bg-green-400 mx-1 p-2 rounded-lg text-slate-100'
+              className='bg-[#ef476f] hover:bg-[#f45b69] mx-1 p-2 rounded-lg text-slate-100'
               onClick={handleClick}
               name={ele}
             >
