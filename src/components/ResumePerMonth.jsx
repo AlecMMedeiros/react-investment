@@ -48,7 +48,7 @@ export default function ResumePerMonth({
             <Bar dataKey='Value' fill='#fe4a49'/>          
           </BarChart>
         </ResponsiveContainer>
-        <div className='grid grid-cols-7 text-sm'>
+        <div className='grid grid-cols-1 gap-2 text-sm md:grid-cols-7 md:gap-0'>
           {investNames.map((ele) => (
             <button
               key={ele}
