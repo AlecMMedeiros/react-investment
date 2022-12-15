@@ -13,10 +13,9 @@ import {
 
 export default function ResumePerMonth({
   investNames,
-  selectedFundName,
-  Result,
   ResultFullByMonth,
   handleClick,
+  windowSize,
 }) {
   const childHandleClick = ({ currentTarget }) => {
     const selectedFundName = currentTarget.name;
@@ -25,10 +24,10 @@ export default function ResumePerMonth({
     );
     handleClick(fundId);
   };
-
+  console.log(windowSize);
   return (
     <>
-      <div>
+      <div className='md:mx-3'>
         <ResponsiveContainer width='100%' aspect={3}>
           <BarChart
             width={500}
@@ -46,8 +45,17 @@ export default function ResumePerMonth({
             <YAxis fontSize={'12px'} type='number' domain={[0, 2000]} />
             <Tooltip />
             <Legend verticalAlign='top' height={36} />
-            <Bar  dataKey='Value' fill='#00ADB5'>
-              <LabelList fill='#EEEEEE' dataKey='Value' position='inside' />
+            <Bar dataKey='Value' fill='#00ADB5'>
+              {windowSize < 768 ? (
+                ''
+              ) : (
+                <LabelList
+                  fontSize={'12px'}
+                  fill='#EEEEEE'
+                  dataKey='Value'
+                  position='inside'
+                />
+              )}
             </Bar>
           </BarChart>
         </ResponsiveContainer>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import investmentsData from '../database/investments-2022-11-btc.json';
 import { resumeByMonth, yieldPerMonth } from '../helpers/helpers';
 import ResumePerMonth from './ResumePerMonth';
@@ -11,6 +11,14 @@ export default function ResumeFullGraphBar() {
   );
   const [selectedFundName, setSelectedFundName] = useState('Fundo de Ações');
   const [toggleGraph, setToggleGraph] = useState(false);
+  const [windowSize, setWindowSize] = useState('');
+
+  useEffect(() => {
+    setWindowSize(window.innerWidth);
+    window.addEventListener('resize', function () {
+      setWindowSize(window.innerWidth);
+    });
+  }, []);
 
   const selectFund = investmentsData.reports.filter(
     (ele) => ele.investmentId === selectedFundId
@@ -56,6 +64,7 @@ export default function ResumeFullGraphBar() {
             investNames={investNames}
             YeldPerMonth={YeldPerMonth}
             handleClick={handleClick}
+            windowSize={windowSize}
           />
         ) : (
           <ResumePerMonth
@@ -64,6 +73,7 @@ export default function ResumeFullGraphBar() {
             Result={Result}
             ResultFullByMonth={ResultFullByMonth}
             handleClick={handleClick}
+            windowSize={windowSize}
           />
         )}
       </section>

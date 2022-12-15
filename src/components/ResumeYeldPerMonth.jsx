@@ -15,6 +15,7 @@ export default function ResumeYeldPerMonth({
   investNames,
   YeldPerMonth,
   handleClick,
+  windowSize,
 }) {
   const childHandleClick = ({ currentTarget }) => {
     const selectedFundName = currentTarget.name;
@@ -43,8 +44,17 @@ export default function ResumeYeldPerMonth({
             <YAxis fontSize={'12px'} />
             <Tooltip />
             <Legend verticalAlign='top' height={36} />
-            <Bar unit={'%'}  dataKey='Yeld' fill='#00ADB5'>
-              <LabelList unit={'%'} fill='#EEEEEE' dataKey='Yeld' position='inside' />
+            <Bar unit={'%'} dataKey='Yeld' fill='#00ADB5'>
+              {windowSize < 768 ? (
+                ''
+              ) : (
+                <LabelList
+                  fontSize={'12px'}
+                  fill='#EEEEEE'
+                  dataKey='Value'
+                  position='inside'
+                />
+              )}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
