@@ -3,8 +3,7 @@ import {
   BarChart,
   Bar,
   LabelList,
-  XAxis,
-  YAxis,
+  XAxis,  
   CartesianGrid,
   Tooltip,
   Legend,
@@ -17,6 +16,18 @@ export default function ResumePerMonth({
   handleClick,
   windowSize,
 }) {
+
+  const renderLabel = (props) => { 
+    return new Intl.NumberFormat('pt-BR',{style: 'currency', currency: 'BRL', maximumSignificantDigits: 6 }).format(props);
+  };
+
+  const setAspect = (windowSize) => {
+    const breakpoint = 1024;    
+    return windowSize < breakpoint ? 2 : 3;
+  }
+
+  
+
   const childHandleClick = ({ currentTarget }) => {
     const selectedFundName = currentTarget.name;
     const fundId = investmentsData.investments.filter(
@@ -24,11 +35,10 @@ export default function ResumePerMonth({
     );
     handleClick(fundId);
   };
-  console.log(windowSize);
   return (
     <>
       <div className='md:mx-3'>
-        <ResponsiveContainer width='100%' aspect={3}>
+        <ResponsiveContainer width='100%' aspect={setAspect(windowSize)}>
           <BarChart
             width={500}
             height={300}
@@ -41,19 +51,19 @@ export default function ResumePerMonth({
             }}
           >
             <CartesianGrid strokeDasharray='3 3' />
-            <XAxis fontSize={'12px'} dataKey='Month' name='Month' />
-            <YAxis fontSize={'12px'} type='number' domain={[0, 2000]} />
+            <XAxis fontSize={'12px'} dataKey='Month' name='Month' />            
             <Tooltip />
             <Legend verticalAlign='top' height={36} />
-            <Bar dataKey='Value' fill='#00ADB5'>
+            <Bar dataKey='Value' name={'Valor acumulado no mês'} fill='#00ADB5' formatter={renderLabel}>
               {windowSize < 768 ? (
                 ''
               ) : (
-                <LabelList
+                <LabelList               
                   fontSize={'12px'}
                   fill='#EEEEEE'
                   dataKey='Value'
                   position='inside'
+                  formatter={renderLabel}                  
                 />
               )}
             </Bar>

@@ -52,11 +52,13 @@ export default function ResumeFullGraphBar() {
       <section className='w-screen justify-center items-center'>
         <div className='w-screen flex justify-center'>
           <button
-            className='bg-[#00ADB5] hover:bg-[#10A19D] rounded-md text-xs p-2 w-36 justify-self-center text-[#EEEEEE]'
+            className='bg-[#00ADB5] hover:bg-[#10A19D] rounded-md text-xs p-2 w-48 justify-self-center text-[#EEEEEE]'
             style={{ fontFamily: 'Josefin Sans, sans-serif' }}
             onClick={HandletoggleGraph}
           >
-            {toggleGraph ? 'View: Value Per Month' : 'View: Yeld'}
+            {toggleGraph
+              ? 'Exibir: Acumulado por mês'
+              : 'Exibir: Retorno por mês'}
           </button>
         </div>
         {toggleGraph ? (
@@ -69,8 +71,6 @@ export default function ResumeFullGraphBar() {
         ) : (
           <ResumePerMonth
             investNames={investNames}
-            selectedFundName={selectedFundName}
-            Result={Result}
             ResultFullByMonth={ResultFullByMonth}
             handleClick={handleClick}
             windowSize={windowSize}

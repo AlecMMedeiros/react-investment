@@ -4,7 +4,6 @@ import {
   Bar,
   LabelList,
   XAxis,
-  YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
@@ -17,6 +16,15 @@ export default function ResumeYeldPerMonth({
   handleClick,
   windowSize,
 }) {
+  const renderLabel = (props) => {
+    return `${props}%`;
+  };
+
+  const setAspect = (windowSize) => {
+    const breakpoint = 1024;    
+    return windowSize < breakpoint ? 2 : 3;
+  }
+
   const childHandleClick = ({ currentTarget }) => {
     const selectedFundName = currentTarget.name;
     const fundId = investmentsData.investments.filter(
@@ -24,10 +32,11 @@ export default function ResumeYeldPerMonth({
     );
     handleClick(fundId);
   };
+
   return (
     <>
       <div>
-        <ResponsiveContainer width='100%' aspect={3}>
+        <ResponsiveContainer width='100%' aspect={setAspect(windowSize)}>
           <BarChart
             width={500}
             height={300}
@@ -40,19 +49,19 @@ export default function ResumeYeldPerMonth({
             }}
           >
             <CartesianGrid strokeDasharray='3 3' />
-            <XAxis fontSize={'12px'} dataKey='Month' name='Month' />
-            <YAxis fontSize={'12px'} />
+            <XAxis fontSize={'12px'} dataKey='Month' name='Month' />            
             <Tooltip />
             <Legend verticalAlign='top' height={36} />
-            <Bar unit={'%'} dataKey='Yeld' fill='#00ADB5'>
+            <Bar unit={'%'} dataKey='Yeld' name={'Retorno no mês'}fill='#00ADB5'>
               {windowSize < 768 ? (
                 ''
               ) : (
                 <LabelList
                   fontSize={'12px'}
                   fill='#EEEEEE'
-                  dataKey='Value'
+                  dataKey='Yeld'
                   position='inside'
+                  formatter={renderLabel}
                 />
               )}
             </Bar>
