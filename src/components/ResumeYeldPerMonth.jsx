@@ -2,6 +2,7 @@ import investmentsData from '../database/investments-2022-11-btc.json';
 import {
   BarChart,
   Bar,
+  LabelList,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -12,8 +13,6 @@ import {
 
 export default function ResumeYeldPerMonth({
   investNames,
-  selectedFundName,
-  Result,
   YeldPerMonth,
   handleClick,
 }) {
@@ -24,7 +23,6 @@ export default function ResumeYeldPerMonth({
     );
     handleClick(fundId);
   };
-  console.log(YeldPerMonth);
   return (
     <>
       <div>
@@ -41,18 +39,20 @@ export default function ResumeYeldPerMonth({
             }}
           >
             <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='Month' name='Month' />
-            <YAxis />
+            <XAxis fontSize={'12px'} dataKey='Month' name='Month' />
+            <YAxis fontSize={'12px'} />
             <Tooltip />
             <Legend verticalAlign='top' height={36} />
-            <Bar dataKey='Yeld' fill='#fe4a49' />
+            <Bar unit={'%'}  dataKey='Yeld' fill='#00ADB5'>
+              <LabelList unit={'%'} fill='#EEEEEE' dataKey='Yeld' position='inside' />
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
         <div className='grid grid-cols-1 gap-2 text-sm md:grid-cols-7 md:gap-0'>
           {investNames.map((ele) => (
             <button
               key={ele}
-              className='bg-[#ef476f] hover:bg-[#f45b69] mx-1 p-2 rounded-lg text-slate-100 text'
+              className='bg-[#00ADB5] hover:bg-[#10A19D] mx-1 p-2 rounded-lg text-slate-100 text'
               onClick={childHandleClick}
               name={ele}
             >

@@ -50,7 +50,7 @@ export const yieldPerMonth = (Filter) => {
       const yeld = Number((Filter[index + 1].value / Filter[index].value - 1).toFixed(2));
       newObject.push({
         Month: month,
-        Yeld: yeld,
+        Yeld: (yeld * 100).toFixed(2),
       });
     }
   }

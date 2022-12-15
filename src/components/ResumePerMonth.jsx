@@ -2,6 +2,7 @@ import investmentsData from '../database/investments-2022-11-btc.json';
 import {
   BarChart,
   Bar,
+  LabelList,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -41,18 +42,20 @@ export default function ResumePerMonth({
             }}
           >
             <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='Month' name='Month' />
-            <YAxis type='number' domain={[0, 2000]} />
+            <XAxis fontSize={'12px'} dataKey='Month' name='Month' />
+            <YAxis fontSize={'12px'} type='number' domain={[0, 2000]} />
             <Tooltip />
             <Legend verticalAlign='top' height={36} />
-            <Bar dataKey='Value' fill='#fe4a49'/>          
+            <Bar  dataKey='Value' fill='#00ADB5'>
+              <LabelList fill='#EEEEEE' dataKey='Value' position='inside' />
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
         <div className='grid grid-cols-1 gap-2 text-sm md:grid-cols-7 md:gap-0'>
           {investNames.map((ele) => (
             <button
               key={ele}
-              className='bg-[#ef476f] hover:bg-[#f45b69] mx-1 p-2 rounded-lg text-slate-100'
+              className='bg-[#00ADB5] hover:bg-[#10A19D] mx-1 p-2 rounded-lg text-slate-100'
               onClick={childHandleClick}
               name={ele}
             >

@@ -25,34 +25,48 @@ export default function ResumeFullGraphBar() {
 
   const Result = Filter[11].value - Filter[0].value;
 
-  const YeldPerMonth = yieldPerMonth(Filter); 
-   
+  const YeldPerMonth = yieldPerMonth(Filter);
+
   const ResultFullByMonth = resumeByMonth(Filter);
 
-  const HandletoggleGraph = (state) => {
-    setToggleGraph(state)
+  const HandletoggleGraph = () => {
+    setToggleGraph((currentState) => !currentState);
   };
 
   return (
     <>
-    <StatusBar fund={selectedFundName} Result={Result} toggleGraph={toggleGraph} HandletoggleGraph={HandletoggleGraph} />
-      {toggleGraph ? (
-        <ResumeYeldPerMonth
-          investNames={investNames}
-          selectedFundName={selectedFundName}
-          Result={Result}
-          YeldPerMonth={YeldPerMonth}
-          handleClick={handleClick}
-        />
-      ) : (
-        <ResumePerMonth
-          investNames={investNames}
-          selectedFundName={selectedFundName}
-          Result={Result}
-          ResultFullByMonth={ResultFullByMonth}
-          handleClick={handleClick}
-        />
-      )}
+      <StatusBar
+        fund={selectedFundName}
+        Result={Result}
+        toggleGraph={toggleGraph}
+        HandletoggleGraph={HandletoggleGraph}
+      />
+      <section className='w-screen justify-center items-center'>
+        <div className='w-screen flex justify-center'>
+          <button
+            className='bg-[#00ADB5] hover:bg-[#10A19D] rounded-md text-xs p-2 w-36 justify-self-center text-[#EEEEEE]'
+            style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+            onClick={HandletoggleGraph}
+          >
+            {toggleGraph ? 'View: Value Per Month' : 'View: Yeld'}
+          </button>
+        </div>
+        {toggleGraph ? (
+          <ResumeYeldPerMonth
+            investNames={investNames}
+            YeldPerMonth={YeldPerMonth}
+            handleClick={handleClick}
+          />
+        ) : (
+          <ResumePerMonth
+            investNames={investNames}
+            selectedFundName={selectedFundName}
+            Result={Result}
+            ResultFullByMonth={ResultFullByMonth}
+            handleClick={handleClick}
+          />
+        )}
+      </section>
     </>
   );
 }
