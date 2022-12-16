@@ -24,14 +24,15 @@ export default function ResumeFullGraphBar() {
     (ele) => ele.investmentId === selectedFundId
   );
   const Filter = selectFund.sort((a, b) => a.month - b.month);
-  const investNames = investmentsData.investments.map((ele) => ele.description);
+  const investNames = investmentsData.investments.map((ele) => ele.description).sort((a, b) => a.localeCompare(b));
 
   const handleClick = (fundId) => {
     setSelectedFundId(fundId[0].id);
     setSelectedFundName(fundId[0].description);
   };
 
-  const Result = Filter[11].value - Filter[0].value;
+  const ResultBrute = Filter.at(-1).value - Filter[0].value;
+  const ResultRelative = ((ResultBrute / Filter[0].value) )*100;
 
   const YeldPerMonth = yieldPerMonth(Filter);
 
@@ -45,7 +46,8 @@ export default function ResumeFullGraphBar() {
     <>
       <StatusBar
         fund={selectedFundName}
-        Result={Result}
+        Result={ResultBrute}
+        ResultRelative={ResultRelative}
         toggleGraph={toggleGraph}
         HandletoggleGraph={HandletoggleGraph}
       />

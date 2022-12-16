@@ -1,6 +1,7 @@
 export default function StatusBar({
   fund,
   Result,
+  ResultRelative
 }) {
  
   return (
@@ -12,7 +13,7 @@ export default function StatusBar({
     >
       <div className='text-center'>
         <span className='mx-2'>{fund}:</span>
-        <span>R$ {Intl.NumberFormat('pr-BR').format(Result.toFixed(2))}</span>
+        <span>{`R$ ${Intl.NumberFormat('pr-BR').format(Result.toFixed(2))} (${ResultRelative.toFixed(2)}%) `}</span>
       </div>
     </section>
   );

@@ -1,19 +1,18 @@
+export const monthTable = {
+  1: 'Jan',
+  2: 'Fev',
+  3: 'Mar',
+  4: 'Abr',
+  5: 'Mai',
+  6: 'Jun',
+  7: 'Jul',
+  8: 'Ago',
+  9: 'Set',
+  10: 'Out',
+  11: 'Nov',
+  12: 'Dez',
+};
 export const resumeByMonth = (Filter) => {
-  const monthTable = {
-    1: 'Jan',
-    2: 'Fev',
-    3: 'Mar',
-    4: 'Abr',
-    5: 'Mai',
-    6: 'Jun',
-    7: 'Jul',
-    8: 'Ago',
-    9: 'Set',
-    10: 'Out',
-    11: 'Nov',
-    12: 'Dez',
-  };
-
   const newObject = [];
 
   for (let index = 0; index < Filter.length; index++) {
@@ -29,20 +28,6 @@ export const resumeByMonth = (Filter) => {
 };
 
 export const yieldPerMonth = (Filter) => {
-  const monthTable = {
-    1: 'Jan',
-    2: 'Fev',
-    3: 'Mar',
-    4: 'Abr',
-    5: 'Mai',
-    6: 'Jun',
-    7: 'Jul',
-    8: 'Ago',
-    9: 'Set',
-    10: 'Out',
-    11: 'Nov',
-    12: 'Dez',
-  };
   const newObject = [];
   for (let index = 0; index < Filter.length; index++) {
     if (index + 1 < Filter.length) {
