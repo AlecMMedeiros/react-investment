@@ -3,10 +3,14 @@ export default function StatusBar({
   Result,
   ResultRelative
 }) {
- 
+  
+  const resultColor=()=>{
+    return ResultRelative < 0 ? 'text-red-500' : 'text-[#00ADB5]'
+  }
+
   return (
     <section
-      className={`flex flex-col justify-center items-center
+      className={`flex flex-col justify-center items-center ${resultColor()}
                   mb-5 h-16 w-screen  bg-[#393E46]
                   text-[#EEEEEE] font-semibold`}
                   style={{ fontFamily: 'Josefin Sans, sans-serif' }}

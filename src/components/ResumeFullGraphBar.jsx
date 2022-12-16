@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import investmentsData from '../database/investments-2022-11-btc.json';
-import { resumeByMonth, yieldPerMonth } from '../helpers/helpers';
+import { Helpers } from '../helpers';
 import ResumePerMonth from './ResumePerMonth';
 import ResumeYeldPerMonth from './ResumeYeldPerMonth';
 import StatusBar from './StatusBar';
@@ -34,9 +34,9 @@ export default function ResumeFullGraphBar() {
   const ResultBrute = Filter.at(-1).value - Filter[0].value;
   const ResultRelative = ((ResultBrute / Filter[0].value) )*100;
 
-  const YeldPerMonth = yieldPerMonth(Filter);
+  const YeldPerMonth = Helpers.yieldPerMonth(Filter);
 
-  const ResultFullByMonth = resumeByMonth(Filter);
+  const ResultFullByMonth = Helpers.resumeByMonth(Filter);
 
   const HandletoggleGraph = () => {
     setToggleGraph((currentState) => !currentState);

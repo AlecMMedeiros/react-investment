@@ -4,6 +4,7 @@ import {
   Bar,
   LabelList,
   XAxis,
+  YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
@@ -38,18 +39,20 @@ export default function ResumeYeldPerMonth({
       <div>
         <ResponsiveContainer width='100%' aspect={setAspect(windowSize)}>
           <BarChart
-            width={500}
+            width={500}           
             height={300}
             data={YeldPerMonth}
             margin={{
               top: 5,
               right: 30,
               left: 20,
-              bottom: 5,
+              bottom: 5
+              
             }}
           >
             <CartesianGrid strokeDasharray='3 3' />
-            <XAxis fontSize={'12px'} dataKey='Month' name='Month' />            
+            <XAxis fontSize={'12px'} dataKey='Month' name='Month' />                      
+            <YAxis hide={true} type='number' domain={[-15, 20]}/>
             <Tooltip />
             <Legend verticalAlign='top' height={36} />
             <Bar unit={'%'} dataKey='Yeld' name={'Retorno no mês'}fill='#00ADB5'>
