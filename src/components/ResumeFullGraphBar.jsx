@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import investmentsData from '../database/investments-2022-11-btc.json';
-import { Helpers } from '../helpers';
+import { Helpers } from '../services';
 import ResumePerMonth from './ResumePerMonth';
 import ResumeYeldPerMonth from './ResumeYeldPerMonth';
 import StatusBar from './StatusBar';

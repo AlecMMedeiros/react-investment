@@ -12,22 +12,22 @@ export const monthTable = {
   11: 'Nov',
   12: 'Dez',
 };
+
 export const resumeByMonth = (Filter) => {
   const newObject = [];
 
-  for (let index = 0; index < Filter.length; index++) {
-    const month = monthTable[Filter[index].month];
-    const value = Number(Filter[index].value.toFixed(2));
-    newObject.push({
+  Filter.map((ele) => {
+    const month = monthTable[ele.month];
+    const value = Number(ele.value.toFixed(2));
+    return newObject.push({
       Month: month,
       Value: value,
     });
-  }
-
+  });
   return newObject;
 };
 
-export const yieldPerMonth = (Filter) => {
+/*export const yieldPerMonth = (Filter) => {
   const newObject = [];
   for (let index = 0; index < Filter.length; index++) {
     if (index + 1 < Filter.length) {
@@ -42,11 +42,27 @@ export const yieldPerMonth = (Filter) => {
     }
   }
   return newObject;
+};*/
+
+export const yieldPerMonth = (Filter) => {
+  const newObject = [];
+  Filter.map((ele, index) => {
+    if (index + 1 < Filter.length) {
+      const month = monthTable[ele.month+1];
+      const yeld = Number((Filter[index + 1].value / ele.value - 1).toFixed(2));
+      newObject.push({
+        Month: month,
+        Yeld: (yeld * 100).toFixed(2),
+      });
+    }   
+    return newObject
+  });
+  return newObject;
 };
 
 export const CompareFunds = (funds, Filter) => {
   const newObject = [];
-  for (let index = 0; index < Filter.length; index++) {
+  for (let index = 0; index < Filter.length; index+=1) {
     if (index + 1 < Filter.length) {
       if (Filter[index].month === 12) {
         const fundName = funds.filter(
